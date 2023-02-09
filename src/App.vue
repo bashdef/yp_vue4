@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <login></login>
+  </div>
 </template>
 
 <style>
@@ -10,3 +13,13 @@
   color: #2c3e50;
 }
 </style>
+
+<script>
+import Login from "@/components/Login";
+
+export default {
+  components: {
+    Login,
+  }
+}
+</script>

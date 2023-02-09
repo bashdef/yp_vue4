@@ -1,8 +1,8 @@
-const API = process.env.VUE_APP_API;
+const API = 'https://jurapro.bhuser.ru/api-shop/';
 
 export const loginRequest = (user) => {
     return new Promise((resolve, reject) => {
-        fetch(`${API}/login`, {
+        fetch(`${API}login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
