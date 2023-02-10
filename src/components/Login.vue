@@ -35,16 +35,15 @@ export default {
   },
   methods: {
     login() {
+      const API_url = 'login'
       const userData = {
         email: this.username,
-        password: this.password
+        password: this.password,
       };
 
       this.$store
-          .dispatch('AUTH_REQUEST', userData)
-          // .then(() => this.$router.push("/"));
-          console.log(userData)
-          console.log(localStorage.myAppToken)
+          .dispatch('AUTH_REQUEST', {user: userData, url: API_url})
+          .then(() => this.$router.push("/"));
     },
   },
 };

@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { loginRequest } from "../../utils/api";
+import { loginRequest } from "../../utils/api"
 
 export default createStore({
   state: {
@@ -7,6 +7,7 @@ export default createStore({
   },
   getters: {
     isAuthenticated: (state) => !!state.token,
+    isLoggedIn: (state) => !!state.token,
   },
   mutations: {
     AUTH_SUCCESS: (state, token) => {
@@ -14,12 +15,15 @@ export default createStore({
     },
     AUTH_ERROR: (state) => {
       state.token = '';
+    },
+    logout: (state) => {
+      state.token = ''
     }
   },
   actions: {
-    AUTH_REQUEST: ({commit}, user) => {
+    AUTH_REQUEST: ({commit}, inputData) => {
       return new Promise((resolve, reject) => {
-        loginRequest(user)
+        loginRequest(inputData)
             .then((token) => {
               commit('AUTH_SUCCESS', token);
               localStorage.setItem('myAppToken', token);
@@ -32,6 +36,13 @@ export default createStore({
             });
       });
     },
+    logout({commit}) {
+      return new Promise((resolve, reject) => {
+        commit('logout')
+        localStorage.removeItem('myAppToken')
+        resolve()
+      })
+    }
   },
   modules: {
   }
