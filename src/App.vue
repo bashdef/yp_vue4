@@ -1,12 +1,13 @@
 <template>
   <div>
-    <router-link to="/">Home</router-link>
-    <br>
-    <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
-    <br>
-    <router-link v-if="!isLoggedIn" to="/register">Register</router-link>
-    <span v-if="isLoggedIn"><a @click="logout">Logout</a></span>
-    <router-view></router-view>
+    <div class="nav">
+      <router-link to="/" class="nav-link">Home</router-link>
+      <router-link v-if="!isLoggedIn" to="/products" class="nav-link">Products</router-link>
+      <router-link v-if="!isLoggedIn" to="/login" class="nav-link">Login</router-link>
+      <router-link v-if="!isLoggedIn" to="/register" class="nav-link">Register</router-link>
+      <span v-if="isLoggedIn"><a @click="logout" class="nav-link">Logout</a></span>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -17,6 +18,10 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.nav-link {
+  text-decoration: none;
+  padding-right: 20px;
 }
 </style>
 

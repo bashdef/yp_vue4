@@ -3,11 +3,15 @@ import { loginRequest } from "../../utils/api"
 
 export default createStore({
   state: {
+    products: [],
     token: localStorage.getItem('myAppToken') || '',
   },
   getters: {
     isAuthenticated: (state) => !!state.token,
     isLoggedIn: (state) => !!state.token,
+    isProducts: (state) => {
+      return state.products
+    }
   },
   mutations: {
     AUTH_SUCCESS: (state, token) => {
@@ -18,9 +22,17 @@ export default createStore({
     },
     logout: (state) => {
       state.token = ''
+    },
+    viewProducts: (state, products) => {
+      state.products = products
     }
   },
   actions: {
+    async fetchProducts(ctx) {
+      const res = await fetch('https://jurapro.bhuser.ru/api-shop/products')
+      const products = await res.json()
+      ctx.commit('viewProducts', products)
+    },
     AUTH_REQUEST: ({commit}, inputData) => {
       return new Promise((resolve, reject) => {
         loginRequest(inputData)
